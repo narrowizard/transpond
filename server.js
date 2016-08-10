@@ -1,9 +1,10 @@
 var http = require('http');
 var log = require('./utils/log');
+var config = require('./utils/config');
+var handleRequest = require('./utils/handler').handle;
 
-http.createServer(function (req, res) {
-    var url = req.url;
-    
-}).listen(8257);
+config.loadConfig();
 
-log.info('server running at 8257');
+http.createServer(handleRequest).listen(global.PORT);
+
+log.info('server running at ' + global.PORT);
