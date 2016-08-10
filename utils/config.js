@@ -7,4 +7,5 @@ exports.loadConfig = function () {
     global.REMOTEPATH = nconf.get("remotePath");
     global.REMOTEPORT = nconf.get("remotePort");
     global.DEBUG = nconf.get("mode") == "debug";
+    global.PROJECTID = nconf.get("projectId");
 }

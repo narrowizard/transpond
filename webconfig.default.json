@@ -3,5 +3,6 @@
     "remoteAddress": "localhost",
     "remotePath": "/test/interface",
     "remotePort": 7777,
-    "mode": "debug"
+    "mode": "debug",
+    "projectId": "1"
 }
