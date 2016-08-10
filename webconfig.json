@@ -1,7 +1,0 @@
-{
-    "port": 8257,
-    "remoteAddress": "10.0.0.12",
-    "remotePath": "/project/test",
-    "remotePort": 8080,
-    "mode": "debug"
-}

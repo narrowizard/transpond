@@ -1,0 +1,7 @@
+{
+    "port": 8257,
+    "remoteAddress": "localhost",
+    "remotePath": "/test/interface",
+    "remotePort": 7777,
+    "mode": "debug"
+}
