@@ -5,8 +5,10 @@ var url = require('url');
 var log = require('./log');
 
 exports.handle = function (req, res) {
+    log.info(req.url);
     // 解析url参数
-    var query = url.parse(req.url).query;
+    var urlParse = url.parse(req.url);
+    var query = urlParse.query;
     var addr = global.REMOTEADDR;
     var path = global.REMOTEPATH;
     var port = global.REMOTEPORT;
@@ -20,7 +22,7 @@ exports.handle = function (req, res) {
 
     // 发送给远程服务器的表单参数
     var newData = {};
-    newData.Url = req.url;
+    newData.Url = urlParse.pathname;
     newData.Method = req.method;
     newData.UrlData = query;
     newData.ProjectId = pid;
