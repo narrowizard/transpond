@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "colors": "^1.1.2",
+    "crossroads": "^0.12.2",
     "nconf": "^0.8.4"
   }
 }
