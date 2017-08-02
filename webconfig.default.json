@@ -1,8 +1,9 @@
 {
     "port": 8257,
     "remoteAddress": "localhost",
-    "remotePath": "/test/interface",
-    "remotePort": 7777,
-    "mode": "debug",
-    "projectId": "1"
+    "remotePort": 8080,
+    "localAddress": "localhost",
+    "localPort": 8080,
+    "authPath": "/async",
+    "mode": "debug"
 }

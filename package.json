@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "colors": "^1.1.2",
+    "nconf": "^0.8.4"
+  }
+}

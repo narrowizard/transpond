@@ -4,8 +4,9 @@ exports.loadConfig = function () {
     nconf.file({ file: "webconfig.json" });
     global.PORT = nconf.get("port");
     global.REMOTEADDR = nconf.get("remoteAddress");
-    global.REMOTEPATH = nconf.get("remotePath");
     global.REMOTEPORT = nconf.get("remotePort");
+    global.LOCALADDR = nconf.get("localAddress");
+    global.LOCALPORT = nconf.get("localPort");
+    global.AUTHPATH = nconf.get("authPath");
     global.DEBUG = nconf.get("mode") == "debug";
-    global.PROJECTID = nconf.get("projectId");
 }

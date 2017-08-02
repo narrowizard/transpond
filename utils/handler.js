@@ -9,52 +9,52 @@ exports.handle = function (req, res) {
     // 解析url参数
     var urlParse = url.parse(req.url);
     var query = urlParse.query;
-    var addr = global.REMOTEADDR;
-    var path = global.REMOTEPATH;
-    var port = global.REMOTEPORT;
-    var pid = global.PROJECTID;
+    var addr = "";
+    var port = "";
+    if (urlParse.pathname.indexOf(global.AUTHPATH) > -1) {
+        addr = global.REMOTEADDR;
+        port = global.REMOTEPORT;
+    } else {
+        addr = global.LOCALADDR;
+        port = global.LOCALPORT;
+    }
+    var path = urlParse.pathname;
+    if (query) {
+        path += "?" + query;
+    }
 
     // post param
     var postData = '';
 
     // remote response
-    var responseContent = '';
-
-    // 发送给远程服务器的表单参数
-    var newData = {};
-    newData.Url = urlParse.pathname;
-    newData.Method = req.method;
-    newData.UrlData = query;
-    newData.ProjectId = pid;
+    var responseContent = [];
 
     // 解析post参数
     req.on('data', function (d) {
         postData += d;
     }).on('end', function () {
-        newData.PostData = postData;
-
-        var data = querystring.stringify(newData);
+        var data = postData;
         var tempHeaders = req.headers;
         tempHeaders["Content-Type"] = 'application/x-www-form-urlencoded';
         tempHeaders["Content-Length"] = Buffer.byteLength(data);
         var options = {
             host: addr,
             path: path,
-            method: "POST",
+            method: req.method,
             port: port,
             headers: tempHeaders
         };
-
         // 转发请求
         var remoteReq = http.request(options, function (remoteRes) {
-            remoteRes.setEncoding('utf-8');
             remoteRes.on('data', function (d) {
-                responseContent += d;
+                responseContent.push(d);
             }).on('end', function () {
                 var headers = remoteRes.headers;
-                headers["Access-Control-Allow-Origin"] = "*";
                 res.writeHead(200, headers);
-                res.end(responseContent);
+                for (var i = 0; i < responseContent.length; i++) {
+                    res.write(responseContent[i]);
+                }
+                res.end();
             });
         });
 
